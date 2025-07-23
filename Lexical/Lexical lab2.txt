@@ -1,0 +1,138 @@
+//1st task
+#include <iostream>
+using namespace std;
+
+int main() {
+    string input;
+    cout << "Enter an input: ";
+    cin >> input;
+
+    bool isNumeric = true;
+
+    for (int i = 0; input[i]; i++) {
+        if (input[i] < '0' || input[i] > '9') {
+            isNumeric = false;
+            break;
+        }
+    }
+
+    if (isNumeric)
+        cout << "Numeric constant" << endl;
+    else
+        cout << "Not numeric" << endl;
+
+   
+}
+
+
+//task 2
+
+#include <iostream>
+using namespace std;
+
+bool isOperator(char symbol)
+{
+    return (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/' || symbol == '%' || symbol == '=');
+}
+
+int main()
+{
+    string expression;
+    cout << "Enter an expression: ";
+    cin >> expression;
+
+    int operatorCount = 1;
+
+    for (int index = 0; expression[index] != '\0'; index++)
+    {
+        if (isOperator(expression[index]))
+        {
+            cout << "operator" << operatorCount << ": " << expression[index] << endl;
+            operatorCount++;
+        }
+    }
+    
+}
+
+//task 3
+
+#include <iostream>
+using namespace std;
+
+bool isComment(string inputLine)
+{
+    if (inputLine.length() >= 2 && inputLine[0] == '/' && inputLine[1] == '/')
+        return true;
+
+    else if (inputLine.length() >= 4 && inputLine[0] == '/' && inputLine[1] == '*') {
+        for (int index = 2; index < inputLine.length() - 1; index++) {
+            if (inputLine[index] == '*' && inputLine[index + 1] == '/')
+                return true;
+        }
+    }
+    return false;
+}
+
+int main()
+{
+    string Input;
+    cout << "Enter a Comment: ";
+    cin >> Input;
+
+    if (isComment(Input))
+    {
+        if (Input[1] == '/')
+            cout << "It is a single line Comment" << endl;
+        else
+            cout << "It is Multiple line Comment" << endl;
+    }
+    else
+    {
+        cout << "Invalid comment" << endl;
+    }
+    
+}
+
+//task 4
+
+#include <iostream>
+using namespace std;
+
+bool isAlpha(char c)
+{
+    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
+
+bool isAlphaNumUnder(char c)
+{
+    return (isAlpha(c) || (c >= '0' && c <= '9') || c == '_');
+}
+
+bool isValid(string s)
+{
+    if (!(isAlpha(s[0]) || s[0] == '_'))
+        return false;
+
+    for (int i = 1; i < s.size(); i++)
+    {
+        if (!isAlphaNumUnder(s[i]))
+            return false;
+    }
+    return true;
+}
+
+int main()
+{
+    string input;
+    cout << "Enter Identifier: ";
+    cin >> input;
+
+    if (isValid(input))
+        cout << "Valid Identifier" << endl;
+    else
+        cout << "Invalid Identifier" << endl;
+
+}
+
+
+
