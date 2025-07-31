@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+set<string> keywordSet = {"int", "float", "if", "else", "while"};
+set<string> operatorSet = {"+", "-", "*", "/","=","%"};
+set<char> punctuationSet = {';', ',', '(', ')', '{', '}', '[', ']'};
+
+bool isValidIdentifier(string token)
+{
+    return regex_match(token, regex("[_a-zA-Z][_a-zA-Z0-9]*"));
+}
+
+bool isNumericConstant(string token)
+{
+    return regex_match(token, regex("[0-9]+(\\.[0-9]+)?"));
+}
+
+int main()
+{
+    ifstream inputFile("0.txt");
+    if (!inputFile)
+    {
+        cerr << "Unable to open the file\n";
+        return 1;
+    }
+
+    string token;
+
+    while (inputFile >> token)
+    {
+        if (keywordSet.count(token))
+        {
+            cout << token << " ---> keyword" << endl;
+        }
+        else if (operatorSet.count(token))
+        {
+            cout << token << " ---> operator" << endl;
+        }
+        else if (token.size() == 1 && punctuationSet.count(token[0]))
+        {
+            cout << token << " ---> punctuation" << endl;
+        }
+        else if (isValidIdentifier(token))
+        {
+            cout << token << " ---> identifier" << endl;
+        }
+        else if (isNumericConstant(token))
+        {
+            cout << token << " ---> constant" << endl;
+        }
+        else
+        {
+            cout << token << " ---> unknown" << endl;
+        }
+    }
+
+    inputFile.close();
+}
+
+
+int main ( ) {
+int num1 = 20 ;
+float num2 = 10.67 ;
+int sum = num1 + num2 ;
+}
